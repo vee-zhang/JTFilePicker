@@ -12,7 +12,7 @@
 4. 基于kotlin+databinding
 
 ### 安装：
-
+首先在你的项目配置kotlin和databinding依赖,
 在你的moudle里添加如下代码：
 ```
 dependencies {
@@ -20,3 +20,5 @@ dependencies {
     implementation 'com.william:JTFilePicker:1.0.0'
 }
 ```
+### 用法：
+直接看demo吧，懒得写了，有空再补😁
