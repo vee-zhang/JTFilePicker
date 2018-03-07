@@ -1,7 +1,10 @@
 # JTFilePicker
+
+[![Build Status](https://travis-ci.org/zhihu/Matisse.svg)](https://travis-ci.org/zhihu/Matisse)
+
 ##一个超轻量级，简单好用的多文件选择器。
 
-![image](https://github.com/william198824/JTFilePicker/blob/master/jtfilepicker.gif?raw=true)
+![image](jtfilepicker.gif)
 ###功能：
 
 1.支持自定义文件图标
