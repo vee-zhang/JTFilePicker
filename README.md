@@ -1,7 +1,7 @@
 # JTFilePicker
 ##一个超轻量级，简单好用的多文件选择器。
 
-
+![image](https://github.com/william198824/JTFilePicker/blob/master/jtfilepicker.gif?raw=true)
 ###功能：
 
 1.支持自定义文件图标
