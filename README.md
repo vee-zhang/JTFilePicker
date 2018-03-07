@@ -1,7 +1,4 @@
-# JTFilePicker [![jCenter](https://img.shields.io/badge/jCenter-1.0.0-green.svg)](https://bintray.com/aohayou/maven/JTFilePicker/_latestVersion)
-[ ![Download](https://api.bintray.com/packages/william198824/maven/JTFilePicker/images/download.svg) ](https://bintray.com/william198824/maven/JTFilePicker/_latestVersion)
-               [![License](https://img.shields.io/badge/License-Apache--2.0%20-blue.svg)](./LICENSE)
-
+# JTFilePicker [![jCenter](https://img.shields.io/badge/jCenter-1.0.0-green.svg)](https://bintray.com/aohayou/maven/JTFilePicker/_latestVersion)[![License](https://img.shields.io/badge/License-Apache--2.0%20-blue.svg)](./LICENSE)
 
 ## 一个超轻量级，简单好用的多文件选择器。
 
