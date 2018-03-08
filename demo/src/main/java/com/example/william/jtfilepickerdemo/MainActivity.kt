@@ -10,6 +10,9 @@ import com.william.jtfilepicker.FileBean
 import com.william.jtfilepicker.JTFilePicker
 import com.william.jtfilepicker.interfaces.OnFileIconLoadListener
 import kotlinx.android.synthetic.main.activity_main.*
+import android.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
+
+
 
 
 class MainActivity : Activity(), OnFileIconLoadListener {
@@ -21,6 +24,7 @@ class MainActivity : Activity(), OnFileIconLoadListener {
         this.tv.setOnClickListener {
             JTFilePicker.from(this, this)
                     .open(0)
+
         }
     }
 

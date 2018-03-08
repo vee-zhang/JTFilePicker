@@ -21,8 +21,76 @@ dependencies {
 }
 ```
 ### 用法：
-直接看demo吧，懒得写了，有空再补😁
+#### Kotlin(推荐):
+```kotlin
+/**
+* kotlin启动
+* @param 参数1：可以是activity或者fragment
+*/
+JTFilePicker.from(activity||fragment, object :OnFileIconLoadListener{
+    override fun fileIconLoad(imageView: ImageView, fileBean: FileBean) {
+        when (fileBean.extension) {
+            "txt" ->
+                //可以用普通方式设置drawable
+                imageView.setImageDrawable(R.drawable.txt)
+            "jpg"->//图片类型可以直接在图标中预览
+                //推荐完全交给Glide或者其他图片加载框架
+                Glide.with(context).load(fileBean.path).into(imageView)
+        }
+    }
+}).open(0)
 
+/**
+* kotlin接收
+*/
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if (resultCode == Activity.RESULT_OK){
+        Toast.makeText(this,"已成功：${data!!.getStringArrayListExtra("paths")}",Toast.LENGTH_SHORT).show()
+    } else {
+        Toast.makeText(this,"已取消",Toast.LENGTH_SHORT).show()
+    }
+}
+```
+#### java:
+```java
+/**
+* java 启动
+* @param 参数1：可以是activity或者fragment
+*/
+JTFilePicker.Companion.from(this, new OnFileIconLoadListener() {
+    @Override
+    public void fileIconLoad(ImageView imageView, FileBean fileBean) {
+        switch (fileBean.getExtension()) {
+            case "txt":
+                //可以用普通方式设置drawable
+                imageView.setImageDrawable(R.drawable.txt);
+                break;
+            case "jpg"://图片类型可以直接在图标中预览
+                //推荐完全交给Glide或者其他图片加载框架
+                Glide.with(context).load(fileBean.getPath()).into(imageView);
+                break;
+                default:
+        }
+
+    }
+}).open(0);
+
+/**
+* java java接收
+*/
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (resultCode == Activity.RESULT_CANCELED) {
+        return;
+    }
+    switch (requestCode) {
+        case REQUEST_PICK_FILE://从选择文件页面返回
+            List<String> paths = data.getStringArrayListExtra("paths");
+        break;
+        default:
+    }
+}
+```
 ## License
 
     Copyright 2018 william Inc.
