@@ -7,37 +7,31 @@ apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 27
-
     dataBinding {
         enabled = true
     }
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-
+        versionName '1.1.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     //kotlin必须加这个
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -53,7 +47,7 @@ publish {
     userOrg = 'william198824'//bintray.com用户名
     groupId = 'com.william'//jcenter上的路径
     artifactId = 'JTFilePicker'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.1.0'//版本号
     desc = 'JTFilePicker是一个超轻量级的多文件选择器，支持自定义文件图标及图标加载方式，易于修改和拓展。'//描述，不重要
     website = 'https://github.com/william198824/JTFilePicker'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

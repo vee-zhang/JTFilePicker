@@ -9,7 +9,7 @@ import com.william.jtfilepicker.interfaces.OnFileIconLoadListener
 /**
  * Created by william on 2018/3/2.
  */
-class JTFilePicker private constructor(private val mContext: Any, private val type: Int) {
+class JTFilePicker private constructor(private val mContext: Any) {
 
     companion object {
 
@@ -24,25 +24,24 @@ class JTFilePicker private constructor(private val mContext: Any, private val ty
         lateinit var mlistener: OnFileIconLoadListener
         fun from(activity: Activity, listener: OnFileIconLoadListener): JTFilePicker {
             mlistener = listener
-            return JTFilePicker(activity, ACTIVITY)
+            return JTFilePicker(activity)
         }
 
         fun from(fragment: Fragment, listener: OnFileIconLoadListener): JTFilePicker {
             mlistener = listener
-            return JTFilePicker(fragment, FRAGMENT)
+            return JTFilePicker(fragment)
+        }
+        fun from(fragment: android.support.v4.app.Fragment, listener: OnFileIconLoadListener): JTFilePicker {
+            mlistener = listener
+            return JTFilePicker(fragment)
         }
     }
 
     fun open(requestCode: Int) {
-        when (type) {
-            ACTIVITY -> {
-                mContext as Activity
-                mContext.startActivityForResult(Intent(mContext, FilePickerActivity::class.java), requestCode)
-            }
-            else -> {
-                mContext as Fragment
-                mContext.startActivityForResult(Intent(mContext.activity,FilePickerActivity::class.java),requestCode)
-            }
+        when (mContext) {
+            is Activity -> mContext.startActivityForResult(Intent(mContext, FilePickerActivity::class.java), requestCode)
+            is Fragment -> mContext.startActivityForResult(Intent(mContext.activity, FilePickerActivity::class.java), requestCode)
+            is android.support.v4.app.Fragment -> mContext.startActivityForResult(Intent(mContext.activity,FilePickerActivity::class.java),requestCode)
         }
     }
 }
