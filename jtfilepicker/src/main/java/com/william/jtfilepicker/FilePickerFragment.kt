@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import java.io.File
 
 class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
 
-    private lateinit var mActivity:FilePickerActivity
+    private lateinit var mActivity: FilePickerActivity
     private lateinit var rv: RecyclerView
     val dataList = arrayListOf<FileBean>()
 
@@ -52,8 +53,16 @@ class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
         val parentActivity = activity as FilePickerActivity
         parentActivity.tv_title.setText(parentDir.name)
         val files = parentDir.listFiles()
-        files.forEach {
-            dataList.add(FileBean(it))
+        //todo 这里效率稍低，待解决
+        for (file in files) {
+            val fileBean = FileBean(file)
+            for (path in JTFilePicker.fileList) {
+                if (TextUtils.equals(fileBean.path, path)) {
+                    fileBean.isChecked = true
+                    break
+                }
+            }
+            dataList.add(fileBean)
         }
         this.rv.adapter.notifyDataSetChanged()
     }
