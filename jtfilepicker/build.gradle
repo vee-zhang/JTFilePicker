@@ -1,19 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.bintray-release'
 
 
 android {
     compileSdkVersion 27
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
-        versionName '1.1.0'
+        versionName '1.2.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,8 +22,6 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-    productFlavors {
-    }
 }
 
 dependencies {
@@ -39,7 +33,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:design:27.1.0'
-    kapt 'com.android.databinding:compiler:3.0.1'
     implementation 'com.android.support:mediarouter-v7:27.1.0'
 }
 
@@ -47,7 +40,7 @@ publish {
     userOrg = 'william198824'//bintray.com用户名
     groupId = 'com.william'//jcenter上的路径
     artifactId = 'JTFilePicker'//项目名称
-    publishVersion = '1.1.0'//版本号
+    publishVersion = '1.2.0'//版本号
     desc = 'JTFilePicker是一个超轻量级的多文件选择器，支持自定义文件图标及图标加载方式，易于修改和拓展。'//描述，不重要
     website = 'https://github.com/william198824/JTFilePicker'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

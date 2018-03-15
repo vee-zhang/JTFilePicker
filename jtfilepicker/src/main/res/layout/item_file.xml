@@ -1,75 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="fileBean"
-            type="com.william.jtfilepicker.FileBean" />
-    </data>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:button="@drawable/checfbox_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_file_icon"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cb"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/imgtype" />
 
-        <CheckBox
-            android:id="@+id/cb"
+    <LinearLayout
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_file_icon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_file_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            tools:text="这是一个文件的名称.jpg" />
+
+        <TextView
+            android:id="@+id/tv_file_create_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/checfbox_selector"
-            android:checked="@{fileBean.isChecked ? true : false}"
-            android:visibility='@{fileBean.isDirectory ? View.INVISIBLE : View.VISIBLE}'
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_file_icon"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/imgtype" />
-
-        <LinearLayout
-            android:id="@+id/group"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_file_icon"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_file_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:text="@{fileBean.name}"
-                android:textSize="18sp"
-                android:textColor="#333333"
-                tools:text="这是一个文件的名称.jpg" />
-
-            <TextView
-                android:id="@+id/tv_file_create_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@{fileBean.lastModified}"
-                android:textColor="#969fa9"
-                tools:text="2017/05/01 20:18" />
-        </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
-</layout>
+            android:layout_marginTop="4dp"
+            android:textColor="#969fa9"
+            tools:text="2017/05/01 20:18" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

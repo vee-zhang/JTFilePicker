@@ -3,6 +3,7 @@ package com.example.william.jtfilepickerdemo
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -10,10 +11,6 @@ import com.william.jtfilepicker.FileBean
 import com.william.jtfilepicker.JTFilePicker
 import com.william.jtfilepicker.interfaces.OnFileIconLoadListener
 import kotlinx.android.synthetic.main.activity_main.*
-import android.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
-
-
-
 
 class MainActivity : Activity(), OnFileIconLoadListener {
 
@@ -23,6 +20,7 @@ class MainActivity : Activity(), OnFileIconLoadListener {
 
         this.tv.setOnClickListener {
             JTFilePicker.from(this, this)
+//                    .setRoot(Environment.getExternalStorageDirectory().path)//可选，默认为内存卡根目录
                     .open(0)
 
         }
@@ -58,4 +56,5 @@ class MainActivity : Activity(), OnFileIconLoadListener {
             Toast.makeText(this,"已取消",Toast.LENGTH_SHORT).show()
         }
     }
+    //todo 选中按钮文字和数量
 }

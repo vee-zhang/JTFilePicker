@@ -38,7 +38,6 @@ class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
         this.rv = rootView.rv
         rootView.rv.layoutManager = LinearLayoutManager(context)
         this.rv.adapter = FileAdapter(dataList, this, activity as FilePickerActivity)
-//        this.rv.addItemDecoration(NormalDecoration(R.color.list_decoration))
         this.rv.addItemDecoration(NormalDecoration())
         return rootView
     }
@@ -90,10 +89,11 @@ class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
 
     override fun onFileItemCheckedChange(checked: Boolean, fileBean: FileBean) {
         if (checked) {
-            mActivity.fileList.add(fileBean.path)
+            JTFilePicker.fileList.add(fileBean.path)
         } else {
-            mActivity.fileList.remove(fileBean.path)
+            JTFilePicker.fileList.remove(fileBean.path)
         }
+        mActivity.reload()
     }
 
 }// Required empty public constructor

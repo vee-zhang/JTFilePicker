@@ -2,67 +2,76 @@ package com.william.jtfilepicker
 
 import android.app.Activity
 import android.app.FragmentTransaction
-import android.databinding.DataBindingUtil
-import android.databinding.ObservableArrayList
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.william.jtfilepicker.databinding.ActivityFilePickerBinding
 import com.william.jtfilepicker.interfaces.OnFolderItemClickListener
 import kotlinx.android.synthetic.main.activity_file_picker.*
+import java.io.File
 
 class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.OnClickListener {
 
-    private lateinit var rootDir :String
-    val fileList = ObservableArrayList<String>()
+    private lateinit var rootDir: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityFilePickerBinding>(this,R.layout.activity_file_picker)
+        setContentView(R.layout.activity_file_picker)
         setSupportActionBar(action)
-        binding.fileList = this.fileList
-        rootDir = Environment.getExternalStorageDirectory().path
-        addFragment(rootDir,false)
+        rootDir = intent.getStringExtra("root")
+        val rootFileBean = FileBean(File(rootDir))
+        replaceFragment(rootFileBean, false)
         setResult(Activity.RESULT_CANCELED)
         this.ib_back.setOnClickListener(this)
         this.tv_cancel.setOnClickListener(this)
         this.btn_choose.setOnClickListener(this)
     }
 
-    private fun addFragment(filePath:String, isAddBackStack:Boolean){
-        val fragment = FilePickerFragment.newInstance(filePath)
+    private fun replaceFragment(fileBean: FileBean, isAddBackStack: Boolean) {
+        val fragment = FilePickerFragment.newInstance(fileBean.path)
         val ft = supportFragmentManager.beginTransaction()
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-        ft.replace(R.id.container,fragment)
-        if (isAddBackStack){ft.addToBackStack(null)}
+        ft.replace(R.id.container, fragment)
+        if (isAddBackStack) {
+            ft.addToBackStack(null)
+        }
         ft.commit()
+        this.tv_title.setText(fileBean.name)
     }
 
     override fun onFolderItemClick(fileBean: FileBean) {
-        addFragment(fileBean.path,true)
+        replaceFragment(fileBean, true)
     }
 
     override fun onClick(v: View) {
-        when(v.id){
-            R.id.btn_choose->{
-                val resultData = intent.putExtra("paths",fileList)
-                setResult(Activity.RESULT_OK,resultData)
+        when (v.id) {
+            R.id.btn_choose -> {
+                val resultData = intent.putExtra("paths", JTFilePicker.fileList)
+                setResult(Activity.RESULT_OK, resultData)
                 finish()
             }
-            R.id.ib_back->{
+            R.id.ib_back -> {
                 val fragmentCount = supportFragmentManager.getBackStackEntryCount()
-                if (fragmentCount>0) {
+                if (fragmentCount > 0) {
                     supportFragmentManager.popBackStack()
-                }else{
+                } else {
                     setResult(Activity.RESULT_CANCELED)
                     finish()
                 }
             }
-            else->{
+            else -> {
                 setResult(Activity.RESULT_CANCELED)
                 finish()
             }
         }
+    }
+
+    fun reload() {
+        this.btn_choose.setText("选中(${JTFilePicker.fileList.size})")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        JTFilePicker.fileList.clear()
     }
 }

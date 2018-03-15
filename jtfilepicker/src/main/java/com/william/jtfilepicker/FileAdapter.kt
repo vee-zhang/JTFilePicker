@@ -1,7 +1,5 @@
 package com.william.jtfilepicker
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.support.annotation.IntDef
 import android.support.annotation.NonNull
 import android.support.v7.widget.RecyclerView
@@ -9,7 +7,6 @@ import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.databinding.library.baseAdapters.BR
 import com.william.jtfilepicker.interfaces.OnFileItemCheckedChangeListener
 import com.william.jtfilepicker.interfaces.OnFolderItemClickListener
 import kotlinx.android.synthetic.main.item_file.view.*
@@ -43,10 +40,10 @@ class FileAdapter(
         return if (file.isDirectory) TYPE_FOLDER else TYPE_FILE
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_file, parent, false)
-        return object : ViewHolder(viewDataBinding.root){}
+        val itemView = layoutInflater.inflate(R.layout.item_file, parent, false)
+        return object : ViewHolder(itemView){}
     }
 
     override fun getItemCount(): Int {
@@ -54,10 +51,12 @@ class FileAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val binding = DataBindingUtil.getBinding<ViewDataBinding>(holder.itemView)
         val itemView = holder.itemView
         val fileBean = list.get(position)
-        binding.setVariable(BR.fileBean,fileBean)
+        itemView.tv_file_name.setText(fileBean.name)
+        itemView.tv_file_create_time.setText(fileBean.lastModified)
+        itemView.cb.setOnCheckedChangeListener(null)
+        itemView.cb.isChecked = fileBean.isChecked
         itemView.cb.setOnCheckedChangeListener { compoundButton, b ->
             onFileItemCheckedChangeListener.onFileItemCheckedChange(b, fileBean)
         }

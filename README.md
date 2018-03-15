@@ -1,4 +1,4 @@
-# JTFilePicker [![jCenter](https://img.shields.io/badge/jCenter-1.1.0-green.svg)](https://bintray.com/william198824/maven/JTFilePicker/_latestVersion)  [![License](https://img.shields.io/badge/License-Apache--2.0%20-blue.svg)](./LICENSE)
+# JTFilePicker [![jCenter](https://img.shields.io/badge/jCenter-1.2.0-green.svg)](https://bintray.com/william198824/maven/JTFilePicker/_latestVersion)  [![License](https://img.shields.io/badge/License-Apache--2.0%20-blue.svg)](./LICENSE)
 
 
 ## 一个超轻量级，简单好用的多文件选择器。
@@ -9,15 +9,15 @@
 1. 支持自定义文件图标
 2. 以字符串集合返回
 3. 超级轻量，超级简单
-4. 基于kotlin+databinding
+4. 基于kotlin
 
 ### 安装：
-首先在你的项目配置kotlin和databinding依赖,
+首先在你的项目配置kotlin环境,
 在你的moudle里添加如下代码：
 ```
 dependencies {
     ......
-    implementation 'com.william:JTFilePicker:1.1.0'
+    implementation 'com.william:JTFilePicker:1.2.0'
 }
 ```
 ### 用法：
@@ -38,7 +38,10 @@ JTFilePicker.from(activity||fragment, object :OnFileIconLoadListener{
                 Glide.with(context).load(fileBean.path).into(imageView)
         }
     }
-}).open(0)
+})
+//可选，设置首页路径（即能打开的根目录）默认为内存卡根目录
+//.setRoot(Environment.getExternalStorageDirectory().path)
+.open(0)
 
 /**
 * kotlin接收
@@ -73,7 +76,10 @@ JTFilePicker.Companion.from(this, new OnFileIconLoadListener() {
         }
 
     }
-}).open(0);
+})
+//可选，设置首页路径（即能打开的根目录）默认为内存卡根目录
+//.setRoot(Environment.getExternalStorageDirectory().path)
+.open(0);
 
 /**
 * java java接收
