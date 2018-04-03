@@ -46,7 +46,8 @@ class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
     override fun onStart() {
         super.onStart()
         val parentActivity = activity as FilePickerActivity
-        parentActivity.tv_title.setText(parentDir.name)
+        val title = if (TextUtils.equals(parentActivity.rootDir,parentDir.path)) "根目录" else parentDir.name
+        parentActivity.tv_title.setText(title)
         val files = parentDir.listFiles()
         //todo 这里效率稍低，待解决
         for (file in files) {

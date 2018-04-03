@@ -44,7 +44,7 @@ class FileAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemView = layoutInflater.inflate(R.layout.item_file, parent, false)
-        return object : ViewHolder(itemView){}
+        return object : ViewHolder(itemView) {}
     }
 
     override fun getItemCount(): Int {
@@ -72,12 +72,17 @@ class FileAdapter(
                 }
                 itemView.cb.visibility = View.VISIBLE
                 itemView.setOnClickListener {
-                    if (itemView.cb.isChecked) {
-                        fileBean.isChecked = false
-                        itemView.cb.isChecked = false
+                    if (fileBean.name.contains(".")) {
+
+                        if (itemView.cb.isChecked) {
+                            fileBean.isChecked = false
+                            itemView.cb.isChecked = false
+                        } else {
+                            fileBean.isChecked = true
+                            itemView.cb.isChecked = true
+                        }
                     } else {
-                        fileBean.isChecked = true
-                        itemView.cb.isChecked = true
+                        Toast.makeText(itemView.context, "不支持无后缀名文件，请重新选择！", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -85,14 +90,9 @@ class FileAdapter(
                 itemView.cb.visibility = View.INVISIBLE
                 itemView.cb.isChecked = false
                 itemView.setOnClickListener {
-                    if(fileBean.name.contains(".")) {
-                        onFolderItemClickListener.onFolderItemClick(fileBean)
-                    } else {
-                        Toast.makeText(itemView.context,"不支持无后缀名文件，请重新选择！",Toast.LENGTH_SHORT).show()
-                    }
+                    onFolderItemClickListener.onFolderItemClick(fileBean)
                 }
             }
         }
-
     }
 }

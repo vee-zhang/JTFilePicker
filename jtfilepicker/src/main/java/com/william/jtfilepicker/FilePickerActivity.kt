@@ -14,7 +14,7 @@ import java.io.File
 
 class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.OnClickListener {
 
-    private lateinit var rootDir: String
+    lateinit var rootDir: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +37,6 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
             ft.addToBackStack(null)
         }
         ft.commit()
-        val title = if (TextUtils.equals(fileBean.name,rootDir)) "根目录" else fileBean.name
-        this.tv_title.setText(title)
     }
 
     override fun onFolderItemClick(fileBean: FileBean) {
