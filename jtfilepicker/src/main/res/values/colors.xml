@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="btn_choose">#3c7feb</color>
+    <color name="btn_selected">#3c7feb</color>
     <color name="white">#ffffff</color>
     <color name="list_decoration">#ececec</color>
     <color name="toolbar_splite">#b2b2b2</color>
     <color name="page_title">#131313</color>
+    <color name="btn_unselected">#f5f5f5</color>
 </resources>

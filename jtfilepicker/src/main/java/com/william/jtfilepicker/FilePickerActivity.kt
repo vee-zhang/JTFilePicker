@@ -19,7 +19,6 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_picker)
-        setSupportActionBar(action)
         rootDir = intent.getStringExtra("root")
         val rootFileBean = FileBean(File(rootDir))
         replaceFragment(rootFileBean, false)
@@ -49,10 +48,6 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_choose -> {
-                if (JTFilePicker.fileList.isEmpty()){
-                    Toast.makeText(this@FilePickerActivity,"请选择文件！",Toast.LENGTH_SHORT).show()
-                    return
-                }
                 val resultData = intent.putExtra("paths", JTFilePicker.fileList)
                 setResult(Activity.RESULT_OK, resultData)
                 finish()
@@ -74,7 +69,14 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
     }
 
     fun reload() {
-        this.btn_choose.setText("选中(${JTFilePicker.fileList.size})")
+        val count = JTFilePicker.fileList.size
+        if (count>0) {
+            this.btn_choose.isEnabled = true
+            this.btn_choose.setText("上传(${count})")
+        } else {
+            this.btn_choose.isEnabled = false
+            this.btn_choose.setText("上传")
+        }
     }
 
     override fun onDestroy() {

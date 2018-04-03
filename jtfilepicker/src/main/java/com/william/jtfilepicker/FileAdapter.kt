@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.william.jtfilepicker.interfaces.OnFileItemCheckedChangeListener
 import com.william.jtfilepicker.interfaces.OnFolderItemClickListener
 import kotlinx.android.synthetic.main.item_file.view.*
@@ -84,7 +85,11 @@ class FileAdapter(
                 itemView.cb.visibility = View.INVISIBLE
                 itemView.cb.isChecked = false
                 itemView.setOnClickListener {
-                    onFolderItemClickListener.onFolderItemClick(fileBean)
+                    if(fileBean.name.contains(".")) {
+                        onFolderItemClickListener.onFolderItemClick(fileBean)
+                    } else {
+                        Toast.makeText(itemView.context,"不支持无后缀名文件，请重新选择！",Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/toolbar_splite" />
+        </shape>
+    </item>
+    <item android:top="1px">
+        <shape>
+            <solid android:color="@color/btn_selected" />
+        </shape>
+    </item>
+</layer-list>
