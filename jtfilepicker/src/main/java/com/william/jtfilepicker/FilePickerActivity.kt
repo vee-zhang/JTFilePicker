@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
 import com.william.jtfilepicker.interfaces.OnFolderItemClickListener
 import kotlinx.android.synthetic.main.activity_file_picker.*
 import java.io.File
@@ -46,6 +47,10 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_choose -> {
+                if (JTFilePicker.fileList.isEmpty()){
+                    Toast.makeText(this@FilePickerActivity,"请选择文件！",Toast.LENGTH_SHORT).show()
+                    return
+                }
                 val resultData = intent.putExtra("paths", JTFilePicker.fileList)
                 setResult(Activity.RESULT_OK, resultData)
                 finish()
