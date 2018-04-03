@@ -17,7 +17,7 @@
 ```
 dependencies {
     ......
-    implementation 'com.william:JTFilePicker:1.2.2'
+    implementation 'com.william:JTFilePicker:1.2.3'
 }
 ```
 ### 用法：

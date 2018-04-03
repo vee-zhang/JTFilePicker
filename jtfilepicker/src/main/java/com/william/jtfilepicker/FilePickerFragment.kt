@@ -43,11 +43,6 @@ class FilePickerFragment : Fragment(), OnFileItemCheckedChangeListener {
         return rootView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-    }
-
     override fun onStart() {
         super.onStart()
         val parentActivity = activity as FilePickerActivity

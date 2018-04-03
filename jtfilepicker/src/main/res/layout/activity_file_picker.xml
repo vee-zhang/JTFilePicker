@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:background="@color/btn_choose"
         android:padding="20dp"
-        android:text="选中(0)"
+        android:text="@string/btn_select"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent" />

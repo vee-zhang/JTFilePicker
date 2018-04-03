@@ -5,6 +5,7 @@ import android.app.FragmentTransaction
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.william.jtfilepicker.interfaces.OnFolderItemClickListener
@@ -37,7 +38,8 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
             ft.addToBackStack(null)
         }
         ft.commit()
-        this.tv_title.setText(fileBean.name)
+        val title = if (TextUtils.equals(fileBean.name,rootDir)) "根目录" else fileBean.name
+        this.tv_title.setText(title)
     }
 
     override fun onFolderItemClick(fileBean: FileBean) {
