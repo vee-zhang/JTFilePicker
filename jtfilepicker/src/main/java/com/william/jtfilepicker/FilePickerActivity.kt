@@ -73,7 +73,7 @@ class FilePickerActivity : AppCompatActivity(), OnFolderItemClickListener, View.
             this.btn_choose.setText("上传(${count})")
         } else {
             this.btn_choose.isEnabled = false
-            this.btn_choose.setText("上传")
+            this.btn_choose.setText(R.string.btn_select)
         }
     }
 
