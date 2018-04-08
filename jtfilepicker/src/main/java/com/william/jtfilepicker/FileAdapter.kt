@@ -59,31 +59,22 @@ class FileAdapter(
         itemView.cb.setOnCheckedChangeListener(null)
         itemView.cb.isChecked = fileBean.isChecked
         itemView.cb.setOnCheckedChangeListener { compoundButton, b ->
-            onFileItemCheckedChangeListener.onFileItemCheckedChange(b, fileBean)
+            if (!fileBean.name.contains(".")) {
+                compoundButton.isChecked = false
+                Toast.makeText(itemView.context, "不支持无后缀名文件，请重新选择！", Toast.LENGTH_SHORT).show()
+            } else {
+                fileBean.isChecked = if (b) true else false
+                onFileItemCheckedChangeListener.onFileItemCheckedChange(b, fileBean)
+            }
         }
         JTFilePicker.mlistener.fileIconLoad(itemView.iv_file_icon, fileBean)
 
         when (holder.itemViewType) {
             TYPE_FILE -> {
-                if (fileBean.isChecked) {
-                    itemView.cb.isChecked = true
-                } else {
-                    itemView.cb.isChecked = false
-                }
+                itemView.cb.isChecked = fileBean.isChecked
                 itemView.cb.visibility = View.VISIBLE
                 itemView.setOnClickListener {
-                    if (fileBean.name.contains(".")) {
-
-                        if (itemView.cb.isChecked) {
-                            fileBean.isChecked = false
-                            itemView.cb.isChecked = false
-                        } else {
-                            fileBean.isChecked = true
-                            itemView.cb.isChecked = true
-                        }
-                    } else {
-                        Toast.makeText(itemView.context, "不支持无后缀名文件，请重新选择！", Toast.LENGTH_SHORT).show()
-                    }
+                    itemView.cb.isChecked = !itemView.cb.isChecked
                 }
             }
             TYPE_FOLDER -> {
